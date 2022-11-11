@@ -1,0 +1,202 @@
+/* Medium Layout: 1280px. */
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    
+}
+
+/* Tablet Layout: 768px. */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+    
+
+}
+
+/* Mobile Layout: 320px. */
+@media only screen and (max-width: 767px) {
+
+    .btn-success, .btn-info, .btn-danger {
+        padding: 13px 15px;
+        font-weight: 600;
+        line-height: 1;
+        margin: 0;
+        height: 45px;
+    }
+
+
+    input[type="text"], input[type="email"], input[type="url"], input[type="password"], input[type="search"], input[type="tel"], input[type="number"], input[type="date"], textarea, select, .form-control {
+        height: 40px;
+    }
+
+    .newsletter input {
+        padding: 7px;
+    }
+
+    .navbar {
+        padding: 5px 0;
+    }
+
+    .scrollup {
+        width: 40px;
+        height: 40px;
+        position: fixed;
+        bottom: 50px;
+        right: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #98b446;
+        border-radius: 3px;
+        z-index: 99999;
+    }
+
+    .scrollup i {
+        font-size: 15px;
+    }
+
+    .btn-success,
+    .btn-info,
+    .btn-danger {
+        padding: 17px 19px;
+        font-weight: 600;
+        line-height: 1;
+    }
+
+    .slider__img {
+        height: 400px !important;
+    }
+
+    .carousel-caption h1 {
+        text-shadow: none;
+        font-size: 35px;
+        color: #ffffff;
+        margin: 0 0 60px 0;
+    }
+
+    .carousel-caption a {
+        margin-right: 10px !important;
+    }
+
+    .carousel-caption a:last-child {
+        margin-right: 0;
+    }
+
+    .payment-steps {
+        padding: 7px 0;
+    }
+
+    .section-title h2 {
+        font-size: 25px;
+        margin-bottom: 15px;
+    }
+
+    .ch-grid li {
+        width: 170px;
+        height: 200px;
+        display: inline-block;
+        margin: 5px;
+    }
+
+    .call-to-action p {
+        font-size: 20px;
+    }
+
+    .carousel-caption a {
+        margin-bottom: 40px;
+    }
+
+    .testimonial-area {
+        padding: 10px 0;
+    }
+
+    .quoter-img {
+        display: block;
+        margin: 0 auto;
+        height: 150px;
+        width: 150px;
+    }
+
+    .quote-text {
+        margin: 20px 0 0 0;
+    }
+
+    .quote-text p {
+        font-weight: 300;
+        font-size: 15px;
+        text-align: center;
+    }
+
+    .featured-on-area {
+        padding: 20px 0;
+    }
+
+    .owl-carousel .owl-item img {
+        display: block;
+        width: 200px;
+        margin: 0 auto;
+    }
+
+    .no-margin-mobile {
+        margin: 0;
+    }
+
+    .footer-area {
+        padding: 10px 0;
+    }
+
+
+    /* PAYMENT */
+    .sidebar {
+        height: auto;
+    }
+
+    /* DASHBOARD */
+    .navbar-fixed-side {
+        height: auto;
+    }
+
+    .sidenav h3 {
+        font-size: 25px;
+        margin-left: 25px;
+        font-weight: 500;
+    }
+
+    .sidenav ul li a {
+        font-size: 15px;
+        padding: 10px 25px;
+    }
+
+    div#DataTables_Table_0_filter {
+        margin-top: 58px;
+    }
+
+    .coupon {
+        margin-bottom: 20px;
+    }
+
+    .recent-pay-history {
+        margin-bottom: 20px;
+    }
+
+    .dashboard-content {
+        padding: 0 10px;
+    }
+
+    .dash-grid li {
+        width: 130px;
+        height: 150px;
+        display: inline-block;
+        margin: 10px;
+    }
+
+    .dash-info img {
+        height: 40px;
+        width: 40px;
+    }
+
+}
+
+/* Wide Mobile Layout: 480px. */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+
+
+
+}

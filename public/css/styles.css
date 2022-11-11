@@ -1,0 +1,29 @@
+.content-panel {
+    background: white;
+    border-radius: 10px 10px 10px;
+    padding: 40px;
+}
+
+.group {
+    padding: 20px;
+    border: 2px solid;
+    margin-bottom: 23px;
+}
+
+.datablock {
+    background: #3eab48;
+    padding: 4px;
+    border-radius: 6px;
+    margin: 2px;
+}
+
+.unavailable {
+    color: #e45c32;
+    padding: 55px;
+    margin: 20px;
+    text-align: center;
+    border: 2px solid;
+    border-radius: 18px;
+    background: white;
+}
+
