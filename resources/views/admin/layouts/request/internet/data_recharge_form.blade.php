@@ -60,7 +60,7 @@
                                                             <td>{{$package->amount+($package->amount*.25)}} BDT</td>
                                                             <td>
                                                                 <input class="form-control" type="text" name="req_mobile" id="req_mobile" required
-                                                                       value="{{old('req_mobile')}}" placeholder="017XXXXXXXX">
+                                                                       value="" placeholder="017XXXXXXXX">
                                                                   </td>
 
                                                             <td>
@@ -157,7 +157,7 @@
 
                             <tr>
                                 <th scope="row">Before Deduction</th>
-                                <td>{{(int)auth()->user()->balance + (int)Session::get('review')->amount}}</td>
+                                <td>{{Session::get('review')->status=='success'?(int)auth()->user()->balance + (int)Session::get('review')->amount:auth()->user()->balance}}</td>
                             </tr>
 
                             <tr>

@@ -123,7 +123,6 @@
 </div>
 {{--</div>--}}
 <!---728x90--->
-
 <div class="footer">
     <div class="container">
         <h2><a href="index.html">HelloBD</a></h2>

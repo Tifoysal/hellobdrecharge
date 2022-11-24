@@ -109,7 +109,7 @@ class RequestController extends Controller
 
         }catch (\Throwable $exception)
         {
-            return redirect()->back()->withErrors($exception->getMessage());
+            return redirect()->back()->withErrors('No Packages Found.');
         }
       }
 
