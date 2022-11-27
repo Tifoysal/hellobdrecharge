@@ -63,7 +63,7 @@
                                         <td class="font-weight-medium">{{$key+1}}</td>
                                         <td>{{$data->tmp_trxid}}</td>
                                         <td>{{$data->user->phone_number}}</td>
-                                        <td>{{date('Y-m-d h:m:i A',strtotime($data->created_at))}}</td>
+                                        <td>{{date('Y-m-d h:s:i A',strtotime($data->created_at))}}</td>
                                         <td>{{$data->mobile}}</td>
                                         <td>{{$data->user_charge}}</td>
                                         <td>{{$data->telco}}</td>

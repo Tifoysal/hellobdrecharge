@@ -25,78 +25,71 @@
                     @if(count($packages)>0)
 
                         <div class="content-panel">
-                                <div class="">
+                            <div class="">
 
-                                    <div class="tab-content" id="myTabContent" style="padding: 10px;">
-                                        @if(isset($packages['packages']))
-                                            <div class="tab-pane fade show active" id="home" role="tabpanel"
-                                                 aria-labelledby="home-tab">
-                                                    <h1>All {{$type==1?'Combo':($type==2?'Talk Time':'Internet')}} Offers</h1>
+                                <div class="tab-content" id="myTabContent" style="padding: 10px;">
+                                    @if(isset($packages['packages']))
+                                        <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                             aria-labelledby="home-tab">
+                                            <h1>All {{$type==1?'Combo':($type==2?'Talk Time':'Internet')}} Offers</h1>
 
-                                                    <table class="table table-striped">
-                                                        <thead>
-                                                        <tr>
-                                                            <th scope="col">#</th>
-                                                            <th scope="col">Name</th>
-                                                            <th scope="col">Amount</th>
-                                                            <th scope="col">Number</th>
-                                                            <th scope="col">PIN</th>
-                                                            <th scope="col">Action</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        @foreach($packages['packages'] as $key=>$package)
+                                            <table class="table table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Amount</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($packages['packages'] as $key=>$package)
+                                                    @if($package->type==$type)
 
-                                                            @if($package->type==$type)
-                                                          <form action="{{route(auth()->user()->type.'.request.store','data')}}" method="post"
-                                                                      role="form">
-                                                              @csrf
-                                                              <input type="hidden" name="package_id" value="{{$key}}">
-                                                              <input type="hidden" name="req_type" value="prepaid">
-                                                              <input type="hidden" name="req_operator" value="{{$packages['operator']}}">
                                                         <tr>
                                                             <th scope="row">{{$key+1}}</th>
                                                             <td>{{$package->remarks}}</td>
-                                                            <td>{{$package->amount+($package->amount*.25)}} BDT</td>
-                                                            <td>
-                                                                <input class="form-control" type="text" name="req_mobile" id="req_mobile" required
-                                                                       value="" placeholder="017XXXXXXXX">
-                                                                  </td>
-
-                                                            <td>
-                                                                <input class="form-control" type="password" name="pin" id="pin" required
-                                                                       placeholder="pin">
+                                                            <td>{{round($package->amount + ($package->amount *.25))}}
+                                                                BDT
                                                             </td>
 
+
+                                                            <input type="hidden" class="package_id" name="package_id"
+                                                                   value="{{$key}}">
+                                                            <input type="hidden" class="req_operator"
+                                                                   name="req_operator"
+                                                                   value="{{$packages['operator']}}">
                                                             <td>
-                                                                <button type="submit" style="width: 100px;"
-                                                                        class="btn btn-success btn-mar form-control"
-                                                                        onclick="clicked(event)">Send
-                                                                    <i class="fas fa-paper-plane"></i>
+
+                                                                <button onclick="buyOffer({{$key}},'{{$package->remarks}}')" type="button" id="buy" class="btn btn-primary"
+                                                                        data-toggle="modal" data-target="#offerModal">
+                                                                    Buy Now
                                                                 </button>
+
                                                             </td>
+
                                                         </tr>
-                                                          </form>
-                                                        @endif
-                                                        @endforeach
+                                                    @endif
+                                                @endforeach
 
-                                                        </tbody>
-                                                    </table>
+                                                </tbody>
+                                            </table>
 
-                                            </div>
+                                        </div>
 
-                                        @endif
-                                    </div>
+                                    @endif
                                 </div>
+                            </div>
 
                         </div>
-                        @else
-                            <div class="unavailable">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Achtung.svg/1200px-Achtung.svg.png"
-                                     alt="danger" style="width: 100px;">
-                                <p>
-                                <h2>No package found.</h2></p>
-                            </div>
+                    @else
+                        <div class="unavailable">
+                            <img
+                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Achtung.svg/1200px-Achtung.svg.png"
+                                alt="danger" style="width: 100px;">
+                            <p>
+                            <h2>No package found.</h2></p>
+                        </div>
                     @endif
                 </div>
                 <div class="col-md-3">
@@ -113,6 +106,63 @@
         @endif
 
     </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="offerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                   <h3 class="modal-title" id="exampleModalLabel"></h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{route(auth()->user()->type.'.request.store','data')}}" method="post"
+                      role="form">
+                <div class="modal-body">
+
+                        @csrf
+                        <input type="hidden" class="form_package_id" name="package_id"
+                               value="">
+                        <input type="hidden" class="form_req_operator" name="req_operator"
+                               value="{{$packages['operator']}}">
+
+                        <input type="hidden" name="req_type" value="prepaid">
+                       <div class="form-group">
+                           <label for="req_mobile">Enter Mobile Number: *</label>
+                           <input class="form-control" autocomplete="off" type="text" name="req_mobile" id="req_mobile" required
+                                  value="" placeholder="017XXXXXXXX">
+                       </div>
+                        <div class="form-group">
+                            <label for="pin">Enter Your PIN: *</label>
+                            <input class="form-control" autocomplete="off" type="password" name="pin" id="pin" required
+                                   placeholder="pin">
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Buy Now</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        function buyOffer(id,title) {
+
+            $(".form_package_id").val(id);
+            console.log(title);
+            $(".modal-title").html(title);
+        }
+
+    </script>
+
+
     @if(Session::has('review'))
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -157,7 +207,7 @@
 
                             <tr>
                                 <th scope="row">Before Deduction</th>
-                                <td>{{Session::get('review')->status=='success'?(int)auth()->user()->balance + (int)Session::get('review')->amount:auth()->user()->balance}}</td>
+                                <td>{{Session::get('review')->status=='success'?(int)auth()->user()->balance + (int)Session::get('review')->amount+(Session::get('review')->amount*.25):auth()->user()->balance}}</td>
                             </tr>
 
                             <tr>

@@ -104,7 +104,7 @@
                                             <td>{{$data->user->username}}({{$data->user->phone_number}})</td>
                                             <td>{{$data->trx_type}}</td>
                                         @endif
-                                        <td>{{date('Y-m-d h:m:i A',strtotime($data->created_at))}}</td>
+                                        <td>{{date('Y-m-d h:i:s A',strtotime($data->created_at))}}</td>
                                         <td>{{$data->mobile}}</td>
                                         <td>{{$data->amount}}</td>
                                         <td>{{$data->user_charge}}</td>

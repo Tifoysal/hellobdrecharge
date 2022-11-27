@@ -73,6 +73,12 @@ class Helper
         $response = $this->PostApi($url, $body);
         return $response;
     }
+    public function offerRechargeApi($body)// offer recharge api call
+    {
+        $url = 'https://agentapi.paywellonline.com/Recharge/mobileRecharge/topUpOffer';
+        $response = $this->PostApi($url, $body);
+        return $response;
+    }
 
     private function GetApi($url)
     {

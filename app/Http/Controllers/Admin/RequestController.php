@@ -14,6 +14,7 @@ use App\Models\Transaction;
 use App\Models\User;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
+use http\Exception\RuntimeException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -21,6 +22,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Mockery\Exception;
 use NunoMaduro\Collision\Adapters\Phpunit\State;
+use phpDocumentor\Reflection\Exception\PcreException;
 use function PHPUnit\Framework\throwException;
 
 class RequestController extends Controller
@@ -200,6 +202,7 @@ class RequestController extends Controller
     //request start here
     public function store(Request $_post, $type)
     {
+
         if ($type == 'recharge') {
             $_post->validate([
                 'req_mobile' => 'required|size:11',
@@ -244,15 +247,15 @@ class RequestController extends Controller
                 $user_charge = (float)$_post['total_deduction'];
                 $trx_type = 'RE';
                 $service=Service::find($_post->service_id);
+
             } elseif ($type == 'data') {
                 $package_id = $_post->package_id;
                 $package =Cache::get('packages')['packages'][$package_id];
-                $requested_amount = $package->amount;//vendor charge or cost
-                $user_charge = $package->amount+($package->amount * .25);
-
+                $requested_amount = (int) $package->amount; //vendor charge or cost
+                $user_charge =  round($package->amount+($package->amount * .25));
                 $trx_type = 'DR';
             } else {
-                $user_charge=$requested_amount;
+                $user_charge= (int)$_post['req_amount'];
                 $trx_type = 'MB';
             }
 
@@ -319,6 +322,7 @@ class RequestController extends Controller
                                     'con_type' => $_post['req_type'],
                                     'operator' => $telco,
                                 );
+
                                 $response = $helper->rechargeApi($body);
 
                                 if ($response->offsetGet('data')['status'] == '200') {
@@ -366,16 +370,16 @@ class RequestController extends Controller
 //                        session()->flash('error', 'Invalid Operator.');
 //                    }
                     } else {
-                        throw new \ErrorException('Invalid PIN.');
+                        throw new Exception('Invalid PIN.');
                     }
                 } else {
-                    throw new \ErrorException('Number Should be 11 digits.');
+                    throw new Exception('Number Should be 11 digits.');
                 }
             } else {
-                throw new \ErrorException('You have not Enough Balance');
+                throw new Exception('You have not Enough Balance');
             }
         } else {
-            throw new \ErrorException('Account Blocked. Please contact with Admin.');
+            throw new Exception('Account Blocked. Please contact with Admin.');
         }
     }
 

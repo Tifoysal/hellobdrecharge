@@ -73,7 +73,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin'], function () {
         Route::get('/request/data/list', 'RequestController@dataIndex')->name('seller.request.data.index');
         Route::get('/request/data/create', 'RequestController@dataCreate')->name('seller.request.data.create');
         Route::get('/request/data/select-type/{operator}','RequestController@selectType')->name('seller.request.data.selectType');
-        Route::get('/request/data/get-package/{operator}/{type}','RequestController@getPackages')->name('seller.request.data.getpackages');
+        Route::get('/request/data/get-package/{type}','RequestController@getPackages')->name('seller.request.data.getpackages');
 
         //mobile wallet
         Route::get('/request/mBanking/list', 'RequestController@mBankingIndex')->name('seller.mBanking.index');
