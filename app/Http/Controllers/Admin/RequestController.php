@@ -202,7 +202,6 @@ class RequestController extends Controller
     //request start here
     public function store(Request $_post, $type)
     {
-
         if ($type == 'recharge') {
             $_post->validate([
                 'req_mobile' => 'required|size:11',
@@ -241,10 +240,10 @@ class RequestController extends Controller
     public function recharge($_post, $type)
     {
         if (auth()->user()->status === 'active') {
-            $requested_amount = (int)$_post['req_amount'];
+            $requested_amount = (int) $_post['req_amount'];
 
             if ($type == 'recharge') {
-                $user_charge = (float)$_post['total_deduction'];
+                $user_charge = (float) $_post['total_deduction'];
                 $trx_type = 'RE';
                 $service=Service::find($_post->service_id);
 
