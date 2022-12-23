@@ -88,6 +88,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin'], function () {
         //account
         Route::get('account/list', 'AccountController@index')->name('seller.account');
         Route::any('account/search', 'AccountController@search')->name('seller.account.search');
+        Route::any('account/search', 'ConversionController@store')->name('rate.store');
     });
 
     Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {

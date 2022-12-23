@@ -198,8 +198,8 @@
         document.querySelector(".amount").addEventListener("keyup", function (e) {
             if (e.target.value) {
                 var service_id=document.querySelector(".service_id").value
-                fetch("http://hellobdrecharge.test/api/get-rate/"+service_id)
-                {{--fetch(<?php isset($_SERVER["HTTPS"]) ? 'https' : 'http'; ?>"//hellobd.biz/api/get-rate/"+service_id)--}}
+                // fetch("http://hellobdrecharge.test/api/get-rate/"+service_id)
+                fetch(<?php isset($_SERVER["HTTPS"]) ? 'https' : 'http'; ?>"//hellobd.biz/api/get-rate/"+service_id)
                     .then((resp) => resp.json()).then((data) => {
                     document.querySelector(".rate").value = data.data.rate
                     var fees=parseFloat(document.querySelector(".fees").value = data.data.fees)

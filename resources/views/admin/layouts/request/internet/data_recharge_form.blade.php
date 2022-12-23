@@ -207,7 +207,7 @@
 
                             <tr>
                                 <th scope="row">Before Deduction</th>
-                                <td>{{Session::get('review')->status=='success'?(int)auth()->user()->balance + (int)Session::get('review')->amount+(Session::get('review')->amount*.25):auth()->user()->balance}}</td>
+                                <td>{{Session::get('review')->status=='success' ? (int)auth()->user()->balance + (int)Session::get('review')->user_charge : auth()->user()->balance}}</td>
                             </tr>
 
                             <tr>

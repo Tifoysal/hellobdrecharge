@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Helper\Helper;
 use App\Http\Controllers\Controller;
 use App\Mail\NotifyMail;
+use App\Models\Conversion;
 use App\Models\Operator;
 use App\Models\Package;
 use App\Models\Sender;
@@ -128,7 +129,9 @@ class RequestController extends Controller
     public function mBankingCreate()
     {
         $service = Service::where('name', 'internet')->first();
-        return view('admin.layouts.request.mbanking_request_form', compact('service'));
+        $rate = Conversion::where('user_id', auth()->user()->id)->first();
+        $conversion_rate=$rate?$rate->rate:0;
+        return view('admin.layouts.request.mbanking_request_form', compact('service','conversion_rate'));
     }
 
 

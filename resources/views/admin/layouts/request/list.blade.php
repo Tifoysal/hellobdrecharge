@@ -77,15 +77,15 @@
                                     @if(auth()->user()->type=='admin')
                                         <th>Sender</th>
                                         <th>Trx Type</th>
+                                        <th>Order Amount</th>
+                                        <th>Rate</th>
+                                        {{--                                    <th>Vendor Charge</th>--}}
+                                        <th>Fees</th>
+                                        <th>Commission/Discount</th>
                                     @endif
                                     <th>DateTime</th>
                                     <th>Mobile</th>
-                                    <th>Order Amount</th>
                                     <th>User Charge</th>
-                                    <th>Rate</th>
-                                    {{--                                    <th>Vendor Charge</th>--}}
-                                    <th>Fees</th>
-                                    <th>Commission/Discount</th>
                                     <th>Total Deduction</th>
                                     <th>Operator</th>
                                     <th>Transaction ID</th>
@@ -103,14 +103,14 @@
                                         @if(auth()->user()->type=='admin')
                                             <td>{{$data->user->username}}({{$data->user->phone_number}})</td>
                                             <td>{{$data->trx_type}}</td>
+                                            <td>{{$data->amount}}</td>
+                                            <td>{{$data->rate}}</td>
+                                            <td>{{$data->fees}}</td>
+                                            <td>{{$data->discount_commission}}</td>
                                         @endif
                                         <td>{{date('Y-m-d h:i:s A',strtotime($data->created_at))}}</td>
                                         <td>{{$data->mobile}}</td>
-                                        <td>{{$data->amount}}</td>
                                         <td>{{$data->user_charge}}</td>
-                                        <td>{{$data->rate}}</td>
-                                        <td>{{$data->fees}}</td>
-                                        <td>{{$data->discount_commission}}</td>
                                         <td>{{$data->total_deduction}}</td>
                                         <td>{{$data->telco}}</td>
                                         <td>{{$data->trx_id}}</td>
